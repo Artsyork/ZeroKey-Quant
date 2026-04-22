@@ -52,8 +52,8 @@
 ### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/zerokey-quant.git
-cd zerokey-quant
+git clone https://github.com/Artsyork/ZeroKey-Quant.git
+cd ZeroKey-Quant
 ```
 
 ### 2. 의존성 설치
