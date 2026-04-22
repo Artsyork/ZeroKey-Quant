@@ -5,7 +5,7 @@ Usage : python3 main.py
 Opens : http://localhost:5001
 """
 
-import json, os, re, sys, threading, time, webbrowser, warnings
+import json, os, re, threading, time, webbrowser, warnings
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 from datetime import datetime
 import pytz
@@ -20,21 +20,7 @@ from plotly.subplots import make_subplots
 warnings.filterwarnings("ignore")
 app = Flask(__name__)
 
-# PyInstaller 번들 내부 경로 (일반 실행 시에도 동일하게 동작)
-BASE_DIR = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-
-def _data_dir() -> str:
-    """런타임 데이터 저장 경로 — PyInstaller 번들은 번들 외부에 저장"""
-    if getattr(sys, '_MEIPASS', None):
-        # 번들 실행 시: OS 표준 앱 데이터 디렉토리 사용
-        if sys.platform == 'win32':
-            d = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')), 'ZeroKeyQuant')
-        else:
-            d = os.path.expanduser('~/Library/Application Support/ZeroKeyQuant')
-        os.makedirs(d, exist_ok=True)
-        return d
-    # 일반 실행 시: main.py 와 같은 디렉토리
-    return os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ══════════════════════════════════════════════
 # KOREAN STOCK DETECTION & DATA FETCH
@@ -314,7 +300,7 @@ def build(ticker: str, period: str = "1y", interval: str = "1d"):
 # AI ANALYSIS — Gemini 1.5 Flash (free 1500/day)
 # ══════════════════════════════════════════════
 
-_USAGE_FILE  = os.path.join(_data_dir(), "ai_usage.json")
+_USAGE_FILE  = os.path.join(BASE_DIR, "ai_usage.json")
 _DAILY_LIMIT = 1500
 _usage_lock  = threading.Lock()
 
