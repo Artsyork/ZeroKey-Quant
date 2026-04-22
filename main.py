@@ -613,6 +613,10 @@ def make_chart(df, ticker, stock_name, currency):
 
 @app.route("/")
 def index():
+    return send_file("landing.html")
+
+@app.route("/dashboard")
+def dashboard():
     return send_file("dashboard.html")
 
 def _market_meta(korean: bool, df: pd.DataFrame) -> dict:

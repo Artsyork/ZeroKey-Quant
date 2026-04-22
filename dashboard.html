@@ -2276,17 +2276,10 @@ function updateSfKeyStatus() {
   }
 }
 
-// 초기 랜딩페이지 표시 여부 결정
+// 랜딩 오버레이는 ⚙ 설정 버튼으로만 열림 (첫방문 자동표시 제거 — landing.html 분리)
 (function initLanding() {
   updateSfKeyStatus();
-  const visited = localStorage.getItem('lp_visited');
-  if (visited) {
-    // 재방문: 바로 대시보드
-    document.getElementById('landing').style.display = 'none';
-  } else {
-    // 첫 방문: 랜딩 표시
-    document.getElementById('landing').style.display = 'flex';
-  }
+  document.getElementById('landing').style.display = 'none';
   // 저장된 키 있으면 상태 표시
   const key = localStorage.getItem('gemini_api_key');
   if (key) {
