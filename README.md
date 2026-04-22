@@ -45,38 +45,96 @@
 
 ## 🚀 설치 및 실행
 
-### 요구사항
-- Python 3.10 이상
-- 인터넷 연결 (데이터 실시간 조회)
+> Python 3.10 이상과 인터넷 연결이 필요합니다.
 
-### 1. 저장소 클론
+---
+
+### 🍎 Mac
+
+**1. Python 설치 확인**
+
+터미널을 열고 아래 명령어를 입력합니다.
+
+```bash
+python3 --version
+```
+
+버전이 출력되면 이미 설치되어 있습니다. 설치가 안 되어 있다면 [python.org](https://www.python.org/downloads/) 에서 다운로드하세요.
+
+**2. 저장소 클론**
 
 ```bash
 git clone https://github.com/Artsyork/ZeroKey-Quant.git
 cd ZeroKey-Quant
 ```
 
-### 2. 의존성 설치
+**3. 의존성 설치**
 
 ```bash
+pip3 install flask yfinance pandas numpy plotly requests pytz
+```
+
+**4. 실행**
+
+```bash
+python3 main.py
+```
+
+브라우저가 자동으로 `http://localhost:5001` 을 엽니다. 종료하려면 터미널에서 `Ctrl+C` 를 누르세요.
+
+---
+
+### 🪟 Windows
+
+**1. Python 설치**
+
+[python.org](https://www.python.org/downloads/) 에서 Python 3.10 이상을 다운로드합니다.
+
+> ⚠️ 설치 중 **"Add Python to PATH"** 옵션을 반드시 체크하세요.
+
+**2. 저장소 다운로드**
+
+git이 설치되어 있다면:
+
+```
+git clone https://github.com/Artsyork/ZeroKey-Quant.git
+cd ZeroKey-Quant
+```
+
+git이 없다면 GitHub 페이지에서 **Code → Download ZIP** 으로 다운로드 후 압축을 해제합니다.
+
+**3. 의존성 설치**
+
+다운로드한 폴더에서 주소창에 `cmd` 를 입력해 명령 프롬프트를 열고:
+
+```
 pip install flask yfinance pandas numpy plotly requests pytz
 ```
 
-### 3. 실행
+**4. 실행**
 
-```bash
-python3 main.py
+```
+python main.py
 ```
 
-브라우저가 자동으로 `http://localhost:5001` 을 엽니다.
+브라우저가 자동으로 `http://localhost:5001` 을 엽니다. 종료하려면 명령 프롬프트 창을 닫거나 `Ctrl+C` 를 누르세요.
 
-### 4. AI 분석 기능 사용 (선택)
+---
 
-[Google AI Studio](https://aistudio.google.com/app/apikey) 에서 무료 API 키를 발급한 후:
+### 🤖 AI 분석 기능 설정 (선택)
 
+[Google AI Studio](https://aistudio.google.com/app/apikey) 에서 무료 API 키를 발급한 후 랜딩 페이지에서 입력하거나, 환경변수로 설정할 수 있습니다.
+
+**Mac**
 ```bash
 export GEMINI_API_KEY="your-api-key-here"
 python3 main.py
+```
+
+**Windows**
+```
+set GEMINI_API_KEY=your-api-key-here
+python main.py
 ```
 
 ---
