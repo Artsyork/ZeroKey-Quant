@@ -24,6 +24,11 @@ config.local.*
 ai_usage.json
 ticker_history.json
 
+# ── PyInstaller build output ──────────────
+build/
+dist/
+*.spec
+
 # ── macOS ────────────────────────────────
 .DS_Store
 .AppleDouble
