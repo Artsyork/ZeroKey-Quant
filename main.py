@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-main.py — Quant Dashboard (Flask)
+main.py — ZeroKey Quant (Flask)
 Usage : python3 main.py
 Opens : http://localhost:5001
 """
@@ -910,7 +910,7 @@ def scan_disruptive():
 
 if __name__ == "__main__":
     url = "http://localhost:5001"
-    print(f"[→] Quant Dashboard  →  {url}")
+    print(f"[→] ZeroKey Quant  →  {url}")
     print(f"    미국 주식: AAPL TSLA NVDA")
     print(f"    한국 주식: 005930 (삼성전자) 035420 (네이버)")
     print(f"    Ctrl+C 로 종료\n")

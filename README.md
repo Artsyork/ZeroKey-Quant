@@ -1,4 +1,4 @@
-# 📈 Quant Dashboard
+# 📈 ZeroKey Quant
 
 개인용 퀀트 분석 대시보드. 미국·한국 주식의 기술적 지표를 자동으로 계산하고, 매수/매도/관망 시그널과 목표가를 제시합니다. 별도 구독료 없이 무료 데이터 소스만으로 동작합니다.
 
@@ -52,8 +52,8 @@
 ### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/quant-dashboard.git
-cd quant-dashboard
+git clone https://github.com/YOUR_USERNAME/zerokey-quant.git
+cd zerokey-quant
 ```
 
 ### 2. 의존성 설치
@@ -179,7 +179,7 @@ GEMINI_API_KEY 설정 후, 종목 분석 화면의 **🤖 AI 시그널 분석** 
 ## 🏗 아키텍처
 
 ```
-quant-dashboard/
+zerokey-quant/
 ├── main.py            # Flask 서버 (백엔드 전체)
 ├── dashboard.html     # 단일 페이지 프론트엔드
 ├── ai_usage.json      # AI 일일 사용량 추적 (런타임 생성, git 제외)
