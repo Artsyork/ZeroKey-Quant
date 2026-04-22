@@ -1,0 +1,71 @@
+name: Build Windows Release
+
+# v로 시작하는 태그 push 시 자동 실행 (예: git tag v1.1.0 && git push origin v1.1.0)
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-windows:
+    name: Build Windows Exe
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install flask yfinance pandas numpy plotly requests pytz pyinstaller
+
+      - name: Build .exe
+        run: |
+          pyinstaller `
+            --name "ZeroKey Quant" `
+            --windowed `
+            --add-data "landing.html;." `
+            --add-data "dashboard.html;." `
+            --hidden-import flask `
+            --hidden-import werkzeug `
+            --hidden-import jinja2 `
+            --hidden-import yfinance `
+            --hidden-import plotly `
+            --hidden-import pytz `
+            --noconfirm `
+            main.py
+
+      - name: Zip exe folder
+        run: |
+          cd dist
+          Compress-Archive -Path "ZeroKey Quant" -DestinationPath "ZeroKey-Quant-windows.zip"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "ZeroKey Quant ${{ github.ref_name }}"
+          body: |
+            ## ZeroKey Quant ${{ github.ref_name }}
+
+            ### Windows 설치 방법
+            1. `ZeroKey-Quant-windows.zip` 다운로드 후 압축 해제
+            2. `ZeroKey Quant` 폴더 안의 `ZeroKey Quant.exe` 실행
+
+            ### Mac 실행 방법
+            ```bash
+            git clone https://github.com/Artsyork/ZeroKey-Quant.git
+            cd ZeroKey-Quant
+            pip3 install flask yfinance pandas numpy plotly requests pytz
+            python3 main.py
+            ```
+            또는 `launch.command` 더블클릭 (처음 실행 시 우클릭 → 열기)
+
+            > API 키 없이도 모든 기술적 분석 기능 사용 가능
+          files: dist/ZeroKey-Quant-windows.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
