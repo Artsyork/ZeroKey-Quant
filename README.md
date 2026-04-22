@@ -62,12 +62,6 @@ cd ZeroKey-Quant
 pip install flask yfinance pandas numpy plotly requests pytz
 ```
 
-또는 `requirements.txt` 생성 후 한 번에:
-
-```bash
-pip install -r requirements.txt
-```
-
 ### 3. 실행
 
 ```bash
