@@ -1,0 +1,43 @@
+# ── Python ──────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ─────────────────
+.venv/
+venv/
+env/
+.env
+
+# ── Secrets / API keys ───────────────────
+.env.local
+.env.*.local
+secrets.json
+config.local.*
+
+# ── Runtime data (auto-generated) ────────
+ai_usage.json
+ticker_history.json
+
+# ── macOS ────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Claude Code (local settings) ─────────
+.claude/
+
+# ── IDE ──────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Logs ─────────────────────────────────
+*.log
+logs/
