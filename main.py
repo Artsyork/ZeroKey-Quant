@@ -5,7 +5,7 @@ Usage : python3 main.py
 Opens : http://localhost:5001
 """
 
-import json, os, re, sys, threading, time, webbrowser, warnings
+import json, os, re, threading, time, webbrowser, warnings
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 from datetime import datetime
 import pytz
@@ -20,21 +20,7 @@ from plotly.subplots import make_subplots
 warnings.filterwarnings("ignore")
 app = Flask(__name__)
 
-def _resource_path(rel: str) -> str:
-    """Bundle 내부 파일 경로 반환 — 개발 환경과 PyInstaller 번들 모두 대응."""
-    base = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(base, rel)
-
-def _data_dir() -> str:
-    """런타임 데이터(ai_usage.json 등) 저장 경로 — 번들 외부 쓰기 가능 위치."""
-    if sys.platform == 'darwin':
-        d = os.path.expanduser('~/Library/Application Support/ZeroKeyQuant')
-    elif sys.platform == 'win32':
-        d = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')), 'ZeroKeyQuant')
-    else:
-        d = os.path.expanduser('~/.zerokey-quant')
-    os.makedirs(d, exist_ok=True)
-    return d
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ══════════════════════════════════════════════
 # KOREAN STOCK DETECTION & DATA FETCH
@@ -314,7 +300,7 @@ def build(ticker: str, period: str = "1y", interval: str = "1d"):
 # AI ANALYSIS — Gemini 1.5 Flash (free 1500/day)
 # ══════════════════════════════════════════════
 
-_USAGE_FILE  = os.path.join(_data_dir(), "ai_usage.json")
+_USAGE_FILE  = os.path.join(BASE_DIR, "ai_usage.json")
 _DAILY_LIMIT = 1500
 _usage_lock  = threading.Lock()
 
@@ -629,11 +615,11 @@ def make_chart(df, ticker, stock_name, currency):
 
 @app.route("/")
 def index():
-    return send_file(_resource_path("landing.html"))
+    return send_file(os.path.join(BASE_DIR, "landing.html"))
 
 @app.route("/dashboard")
 def dashboard():
-    return send_file(_resource_path("dashboard.html"))
+    return send_file(os.path.join(BASE_DIR, "dashboard.html"))
 
 def _market_meta(korean: bool, df: pd.DataFrame) -> dict:
     """데이터 소스 · 지연 · 장 상태 · API 한도 메타 정보 생성"""
