@@ -8,6 +8,8 @@
 
 ---
 
+![ZeroKey Quant Demo](demo.gif)
+
 ## ✨ 주요 기능
 
 ### 종목 분석
